@@ -1,3 +1,5 @@
+import RingsAnimation from './RingsAnimation.jsx'
+
 /** 아래 값만 바꿔서 커스터마이즈하세요 */
 const INVITE = {
   groom: '박인범',
@@ -11,7 +13,6 @@ const INVITE = {
     '소중한 분들을 초대합니다. 따뜻한 마음으로 축복해 주시면 큰 기쁨이 되겠습니다.',
 }
 
-const demoGif = `${import.meta.env.BASE_URL}invitation-demo.gif`
 
 function App() {
   return (
@@ -33,14 +34,7 @@ function App() {
       </header>
 
       <figure className="m-0 mb-8 p-0">
-        <img
-          src={demoGif}
-          alt="축하 인사 GIF 예시"
-          className="mx-auto aspect-square w-full max-w-[280px] rounded-full border-4 border-white object-cover shadow-invite"
-          width={480}
-          height={480}
-          loading="eager"
-        />
+        <RingsAnimation />
       </figure>
 
       <section
