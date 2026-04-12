@@ -26,7 +26,7 @@ function App() {
       </p>
 
       {/* 장식 별 */}
-      <p className="mb-8 tracking-[0.6em] text-cream/50 text-xs" style={{ fontFamily: 'var(--font-sc)' }}>✳ ✳ ✳</p>
+      <p className="mb-8 tracking-[0.6em] text-cream/50 text-xs" style={{ fontFamily: 'var(--font-sc)' }}>* * *</p>
 
       {/* 린넨 카드 */}
       <div
