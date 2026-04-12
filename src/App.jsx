@@ -1,4 +1,4 @@
-/** 아래 값만 바꿔서 커스터마이즈하세요 */
+import saveDateImg from './assets/save_the_date.png'
 const INVITE = {
   groom: '박인범',
   bride: '최정원',
@@ -37,12 +37,12 @@ function App() {
         }}
       >
         {/* Save the Date */}
-        <p
-          className="fade-up mb-5 text-burgundy"
-          style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(2rem,9vw,2.5rem)', lineHeight: 1.3, animationDelay: '0.2s' }}
-        >
-          Save the Date
-        </p>
+        <img
+          src={saveDateImg}
+          alt="Save the Date"
+          className="fade-up mx-auto mb-5 w-4/5"
+          style={{ animationDelay: '0.2s' }}
+        />
 
         <p
           className="fade-up mb-1 tracking-wider text-[#2c2420]"
