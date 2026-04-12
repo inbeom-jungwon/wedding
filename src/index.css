@@ -18,6 +18,15 @@
   font-display: block;
 }
 
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono Medium'),
+       url('./fonts/JetBrainsMono-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
+
 @theme {
   --color-bg:           #0d0b0b;
   --color-cream:        #e8ddd0;
@@ -29,6 +38,7 @@
   --font-display: 'Cormorant Garamond', serif;
   --font-script:  'Parfumerie Script Pro', 'Great Vibes', cursive;
   --font-sc:      'Cormorant SC', serif;
+  --font-mono:    'JetBrains Mono', monospace;
 }
 
 @keyframes fadeUp {

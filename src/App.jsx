@@ -7,7 +7,7 @@ const INVITE = {
   date: '2026.09.13',
   time: '5PM',
   venueEn: 'Seokpajung',
-  venueKo: '석 파 정',
+  venueKo: '석파정',
   venueSub: '(서울미술관)',
   address: '서울특별시 종로구 창의문로11길 4-1',
   mapUrl: `https://m.map.naver.com/search2/search.naver?query=${encodeURIComponent('석파정')}#/map`,
@@ -66,7 +66,7 @@ function App() {
       </div>
 
       {/* 부모님 */}
-      <div className="mt-14 space-y-1 text-[0.8rem] font-light leading-loose text-muted">
+      <div className="mt-14 space-y-0.5 text-[0.8rem] font-light leading-snug text-muted" style={{ fontFamily: 'var(--font-mono)' }}>
         <p>
           <span className="text-cream/60">{INVITE.groomParents}</span>
           <span className="mx-2 text-cream/30">의 아들</span>
@@ -80,20 +80,20 @@ function App() {
       </div>
 
       {/* 날짜 반복 */}
-      <div className="mt-12 space-y-1 font-display text-[0.95rem] tracking-widest text-cream/80">
+      <div className="mt-10 space-y-0.5 font-display text-[0.95rem] tracking-widest text-cream/80">
         <p>{INVITE.date}</p>
         <p>{INVITE.time}</p>
       </div>
 
       {/* 장소 */}
-      <div className="mt-8">
+      <div className="mt-6">
         <p
-          className="font-display font-semibold tracking-[0.4em] text-cream"
-          style={{ fontSize: 'clamp(1.6rem,7vw,2rem)' }}
+          className="font-light tracking-[0.4em] text-cream"
+          style={{ fontFamily: 'var(--font-mono)', fontSize: 'clamp(0.85rem,3.5vw,1rem)' }}
         >
           {INVITE.venueKo}
         </p>
-        <p className="mt-1 text-sm font-light tracking-widest text-muted">
+        <p className="mt-1 text-xs font-light tracking-widest text-muted" style={{ fontFamily: 'var(--font-mono)' }}>
           {INVITE.venueSub}
         </p>
       </div>
