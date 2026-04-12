@@ -1,82 +1,115 @@
-import RingsAnimation from './RingsAnimation.jsx'
-
 /** 아래 값만 바꿔서 커스터마이즈하세요 */
 const INVITE = {
   groom: '박인범',
   bride: '최정원',
-  subtitle: '저희 두 사람이 사랑으로 하나가 되려 합니다',
-  dateLine: '2026년 9월 13일 일요일 오후 5시',
-  venue: '석파정',
-  address: '서울특별시 종로구 창의문로 11길 4-1',
+  groomParents: '박 일용 · 이 미경',
+  brideParents: '최 병욱 · 김 명경',
+  date: '2026.09.13',
+  time: '5PM',
+  venueEn: 'Seokpajung',
+  venueKo: '석 파 정',
+  venueSub: '(서울미술관)',
+  address: '서울특별시 종로구 창의문로11길 4-1',
   mapUrl: `https://m.map.naver.com/search2/search.naver?query=${encodeURIComponent('석파정')}#/map`,
-  message:
-    '소중한 분들을 초대합니다. 따뜻한 마음으로 축복해 주시면 큰 기쁨이 되겠습니다.',
 }
-
 
 function App() {
   return (
-    <div className="mx-auto flex min-h-svh max-w-md flex-col items-stretch px-6 pb-14 pt-10 text-center">
-      <header className="mb-8">
-        <p className="mb-3 font-display text-[0.8125rem] uppercase tracking-[0.28em] text-accent">
-          Wedding Invitation
-        </p>
-        <h1 className="mb-4 font-display text-[clamp(2rem,8vw,2.75rem)] font-semibold leading-tight tracking-wide text-ink">
-          <span className="inline">{INVITE.groom}</span>
-          <span className="mx-[0.35em] inline-block font-normal text-accent" aria-hidden="true">
-            ·
-          </span>
-          <span className="inline">{INVITE.bride}</span>
-        </h1>
-        <p className="m-0 text-[0.9375rem] font-light leading-relaxed text-ink-muted">
-          {INVITE.subtitle}
-        </p>
-      </header>
+    <div className="mx-auto flex min-h-svh max-w-sm flex-col items-center bg-bg px-6 pb-20 pt-16 text-center">
 
-      <figure className="m-0 mb-8 p-0">
-        <RingsAnimation />
-      </figure>
-
-      <section
-        className="mb-7 rounded-xl border border-line bg-white p-6 px-5 text-left shadow-invite"
-        aria-labelledby="when-where"
+      {/* We invited you to.. */}
+      <p
+        className="mb-6 text-cream"
+        style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(2rem,9vw,2.6rem)', lineHeight: 1.2 }}
       >
-        <h2
-          id="when-where"
-          className="mb-4 text-center text-[0.8125rem] font-semibold uppercase tracking-[0.12em] text-accent"
-        >
-          일시 · 장소
-        </h2>
-        <dl className="m-0">
-          <div className="mb-4 last:mb-0">
-            <dt className="mb-1 text-xs font-semibold uppercase tracking-wide text-ink-muted">일시</dt>
-            <dd className="m-0 text-[0.9375rem] text-ink">{INVITE.dateLine}</dd>
-          </div>
-          <div className="mb-4 last:mb-0">
-            <dt className="mb-1 text-xs font-semibold uppercase tracking-wide text-ink-muted">장소</dt>
-            <dd className="m-0 text-[0.9375rem] text-ink">
-              {INVITE.venue}
-              <br />
-              <span className="text-sm font-light text-ink-muted">{INVITE.address}</span>
-            </dd>
-          </div>
-        </dl>
-        <a
-          className="mt-5 block rounded-lg border border-line px-[0.65rem] py-[0.65rem] text-center text-sm font-semibold text-accent transition-colors hover:border-accent/25 hover:bg-accent/10"
-          href={INVITE.mapUrl}
-          target="_blank"
-          rel="noreferrer"
-        >
-          지도 보기
-        </a>
-      </section>
-
-      <p className="mb-auto m-0 text-[0.9375rem] font-light leading-[1.85] text-ink-muted">
-        {INVITE.message}
+        We invited you to..
       </p>
 
-      <footer className="mt-10 border-t border-line pt-6 text-[0.8125rem] tracking-[0.2em] text-ink-muted">
-        <p className="m-0">감사합니다</p>
+      {/* 장식 별 */}
+      <p className="mb-8 tracking-[0.6em] text-cream/50 text-xs">✳ ✳ ✳</p>
+
+      {/* 린넨 카드 */}
+      <div
+        className="w-full rounded-sm px-8 py-10 text-[#2c2420]"
+        style={{
+          backgroundImage: `url(${import.meta.env.BASE_URL}linen.png)`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        {/* Save the Date */}
+        <p
+          className="mb-6 text-burgundy"
+          style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(2rem,9vw,2.4rem)', lineHeight: 1.3 }}
+        >
+          Save the Date
+        </p>
+
+        <p
+          className="mb-1 tracking-widest text-[#2c2420]"
+          style={{ fontFamily: 'var(--font-sc)', fontSize: '1.05rem' }}
+        >
+          {INVITE.date}
+        </p>
+        <p
+          className="mb-5 tracking-[0.4em] text-[#2c2420]"
+          style={{ fontFamily: 'var(--font-sc)', fontSize: '1rem' }}
+        >
+          {INVITE.time}
+        </p>
+        <p
+          className="uppercase tracking-[0.25em] text-[#2c2420]"
+          style={{ fontFamily: 'var(--font-sc)', fontSize: '0.9rem' }}
+        >
+          {INVITE.venueEn}
+        </p>
+      </div>
+
+      {/* 부모님 */}
+      <div className="mt-14 space-y-1 text-[0.8rem] font-light leading-loose text-muted">
+        <p>
+          <span className="text-cream/60">{INVITE.groomParents}</span>
+          <span className="mx-2 text-cream/30">의 아들</span>
+          <span className="text-cream">{INVITE.groom}</span>
+        </p>
+        <p>
+          <span className="text-cream/60">{INVITE.brideParents}</span>
+          <span className="mx-2 text-cream/30">의 딸</span>
+          <span className="text-cream">{INVITE.bride}</span>
+        </p>
+      </div>
+
+      {/* 날짜 반복 */}
+      <div className="mt-12 space-y-1 font-display text-[0.95rem] tracking-widest text-cream/80">
+        <p>{INVITE.date}</p>
+        <p>{INVITE.time}</p>
+      </div>
+
+      {/* 장소 */}
+      <div className="mt-8">
+        <p
+          className="font-display font-semibold tracking-[0.4em] text-cream"
+          style={{ fontSize: 'clamp(1.6rem,7vw,2rem)' }}
+        >
+          {INVITE.venueKo}
+        </p>
+        <p className="mt-1 text-sm font-light tracking-widest text-muted">
+          {INVITE.venueSub}
+        </p>
+      </div>
+
+      {/* 지도 버튼 */}
+      <a
+        href={INVITE.mapUrl}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-10 block rounded border border-cream/20 px-8 py-2.5 text-[0.8rem] font-semibold tracking-widest text-cream/70 uppercase transition-colors hover:border-cream/40 hover:text-cream"
+      >
+        지도 보기
+      </a>
+
+      <footer className="mt-14 text-[0.75rem] tracking-[0.3em] text-muted">
+        감사합니다
       </footer>
     </div>
   )

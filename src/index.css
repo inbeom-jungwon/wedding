@@ -1,14 +1,34 @@
 @import 'tailwindcss';
 
+@font-face {
+  font-family: 'Parfumerie Script Pro';
+  src: local('Parfumerie Script Pro'),
+       url('./fonts/ParfumerieScriptPro.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Cormorant SC';
+  src: local('Cormorant SC Medium'),
+       url('./fonts/CormorantSC-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
+
 @theme {
-  --color-paper: #faf8f5;
-  --color-ink: #2c2825;
-  --color-ink-muted: #6b6560;
-  --color-accent: #8b7355;
-  --color-line: rgb(44 40 37 / 0.12);
-  --shadow-invite: 0 24px 48px rgb(44 40 37 / 0.08);
-  --font-body: 'Noto Serif KR', 'Apple SD Gothic Neo', serif;
-  --font-display: 'Cormorant Garamond', 'Noto Serif KR', serif;
+  --color-bg:           #0d0b0b;
+  --color-cream:        #e8ddd0;
+  --color-muted:        #7a6e64;
+  --color-burgundy:     #8b1a1a;
+  --color-linen:        #d9cfbe;
+  --color-linen-border: #bfb09a;
+  --font-body:    'Noto Serif KR', 'Apple SD Gothic Neo', serif;
+  --font-display: 'Cormorant Garamond', serif;
+  --font-script:  'Parfumerie Script Pro', 'Great Vibes', cursive;
+  --font-sc:      'Cormorant SC', serif;
 }
 
 @layer base {
@@ -20,7 +40,7 @@
   }
 
   body {
-    @apply m-0 min-h-svh bg-paper font-normal text-ink;
+    @apply m-0 min-h-svh bg-bg font-normal text-cream;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
   }
