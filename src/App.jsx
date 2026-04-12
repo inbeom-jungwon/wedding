@@ -26,40 +26,39 @@ function App() {
       </p>
 
       {/* 장식 별 */}
-      <p className="mb-8 tracking-[0.6em] text-cream/50 text-xs" style={{ fontFamily: 'var(--font-sc)' }}>* * *</p>
+      <p className="mb-8 tracking-wider text-cream/50 text-xs" style={{ fontFamily: 'var(--font-sc)' }}>* * *</p>
 
       {/* 린넨 카드 */}
       <div
-        className="w-full rounded-sm px-8 py-10 text-[#2c2420]"
+        className="w-full rounded-sm px-8 py-16 text-[#2c2420]"
         style={{
           backgroundImage: `url(${import.meta.env.BASE_URL}linen.png)`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundSize: '100% 100%',
         }}
       >
         {/* Save the Date */}
         <p
-          className="fade-up mb-6 text-burgundy"
-          style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(2rem,9vw,2.4rem)', lineHeight: 1.3, animationDelay: '0.2s' }}
+          className="fade-up mb-5 text-burgundy"
+          style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(2rem,9vw,2.5rem)', lineHeight: 1.3, animationDelay: '0.2s' }}
         >
           Save the Date
         </p>
 
         <p
-          className="fade-up mb-1 tracking-widest text-[#2c2420]"
-          style={{ fontFamily: 'var(--font-sc)', fontSize: '1.05rem', animationDelay: '0.5s' }}
+          className="fade-up mb-1 tracking-wider text-[#2c2420]"
+          style={{ fontFamily: 'var(--font-sc)', fontSize: '0.85rem', animationDelay: '0.5s' }}
         >
           {INVITE.date}
         </p>
         <p
-          className="fade-up mb-5 tracking-[0.4em] text-[#2c2420]"
-          style={{ fontFamily: 'var(--font-sc)', fontSize: '1rem', animationDelay: '0.8s' }}
+          className="fade-up mb-4 tracking-wider text-[#2c2420]"
+          style={{ fontFamily: 'var(--font-sc)', fontSize: '0.82rem', animationDelay: '0.8s' }}
         >
           {INVITE.time}
         </p>
         <p
-          className="fade-up uppercase tracking-[0.25em] text-[#2c2420]"
-          style={{ fontFamily: 'var(--font-sc)', fontSize: '0.9rem', animationDelay: '1.1s' }}
+          className="fade-up uppercase tracking-wider text-[#2c2420]"
+          style={{ fontFamily: 'var(--font-sc)', fontSize: '0.75rem', animationDelay: '1.1s' }}
         >
           {INVITE.venueEn}
         </p>
