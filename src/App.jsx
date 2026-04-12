@@ -39,27 +39,27 @@ function App() {
       >
         {/* Save the Date */}
         <p
-          className="mb-6 text-burgundy"
-          style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(2rem,9vw,2.4rem)', lineHeight: 1.3 }}
+          className="fade-up mb-6 text-burgundy"
+          style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(2rem,9vw,2.4rem)', lineHeight: 1.3, animationDelay: '0.2s' }}
         >
           Save the Date
         </p>
 
         <p
-          className="mb-1 tracking-widest text-[#2c2420]"
-          style={{ fontFamily: 'var(--font-sc)', fontSize: '1.05rem' }}
+          className="fade-up mb-1 tracking-widest text-[#2c2420]"
+          style={{ fontFamily: 'var(--font-sc)', fontSize: '1.05rem', animationDelay: '0.5s' }}
         >
           {INVITE.date}
         </p>
         <p
-          className="mb-5 tracking-[0.4em] text-[#2c2420]"
-          style={{ fontFamily: 'var(--font-sc)', fontSize: '1rem' }}
+          className="fade-up mb-5 tracking-[0.4em] text-[#2c2420]"
+          style={{ fontFamily: 'var(--font-sc)', fontSize: '1rem', animationDelay: '0.8s' }}
         >
           {INVITE.time}
         </p>
         <p
-          className="uppercase tracking-[0.25em] text-[#2c2420]"
-          style={{ fontFamily: 'var(--font-sc)', fontSize: '0.9rem' }}
+          className="fade-up uppercase tracking-[0.25em] text-[#2c2420]"
+          style={{ fontFamily: 'var(--font-sc)', fontSize: '0.9rem', animationDelay: '1.1s' }}
         >
           {INVITE.venueEn}
         </p>
