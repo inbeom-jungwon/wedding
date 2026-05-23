@@ -1,4 +1,11 @@
 import saveDateImg from './assets/save_the_date.png'
+
+const PHOTOS = [
+  '01.jpeg', '02.jpeg', '03.jpeg', '04.jpeg', '05.jpeg',
+  '06.jpeg', '07.jpeg', '08.jpeg', '09.jpeg', '10.jpeg',
+  '11.jpeg', '12.jpeg', '13.jpeg', '14.jpeg', '15.jpeg',
+]
+
 const INVITE = {
   groom: '박인범',
   bride: '최정원',
@@ -107,9 +114,19 @@ function App() {
         지도 보기
       </a>
 
-      <footer className="mt-14 text-[0.75rem] tracking-[0.3em] text-muted">
-        감사합니다
-      </footer>
+      {/* 사진 3열 그리드 */}
+      {PHOTOS.length > 0 && (
+        <div className="mt-10 w-full grid grid-cols-3 gap-1">
+          {PHOTOS.map((filename, i) => (
+            <img
+              key={i}
+              src={`${import.meta.env.BASE_URL}photos/${filename}`}
+              alt={`wedding ${i + 1}`}
+              className="w-full aspect-square object-cover"
+            />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
