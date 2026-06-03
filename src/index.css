@@ -67,15 +67,32 @@
     font-family: var(--font-body);
     font-size: 16px;
     line-height: 1.65;
+    background-color: #0d0b0b;
+    transition: background-color 0.5s ease;
+  }
+
+  html.page-active {
+    background-color: #ede8d4;
   }
 
   body {
     @apply m-0 min-h-svh bg-bg font-normal text-cream;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
+    background-color: #0d0b0b;
+    transition: background-color 0.5s ease;
+  }
+
+  html.page-active body {
+    background-color: #ede8d4;
   }
 
   #root {
     @apply min-h-svh;
+    transition: background-color 0.5s ease;
+  }
+
+  html.page-active #root {
+    background-color: #ede8d4;
   }
 }

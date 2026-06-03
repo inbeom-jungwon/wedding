@@ -3,7 +3,7 @@ import introVideo from './assets/intro.mp4'
 
 const FADE_DURATION_MS = 500
 
-export default function Intro({ onDone }) {
+export default function Intro({ onEnter, onDone }) {
   const videoRef = useRef(null)
   const [ready, setReady] = useState(false)
   const [fading, setFading] = useState(false)
@@ -39,6 +39,7 @@ export default function Intro({ onDone }) {
     }
 
     setFading(true)
+    onEnter()
     setTimeout(() => onDone(), FADE_DURATION_MS)
   }
 

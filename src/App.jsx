@@ -149,7 +149,7 @@ function App() {
   const [lightboxIndex, setLightboxIndex] = useState(null)
 
   return (
-    <div className="mx-auto min-h-svh max-w-sm bg-bg">
+    <div className="mx-auto min-h-svh max-w-sm bg-[#ede8d4]">
 
       {/* 디자인 청첩장 이미지 + 오시는 길 버튼 */}
       <div className="relative w-full">
