@@ -5,44 +5,50 @@ const FADE_DURATION_MS = 500
 
 export default function Intro({ onDone }) {
   const videoRef = useRef(null)
-  const [canPlay, setCanPlay] = useState(false)
   const [ready, setReady] = useState(false)
   const [fading, setFading] = useState(false)
+  const [needsTap, setNeedsTap] = useState(false)
 
   useEffect(() => {
-    const link = document.createElement('link')
-    link.rel = 'preload'
-    link.as = 'video'
-    link.href = introVideo
-    document.head.appendChild(link)
-    return () => link.remove()
-  }, [])
+    const video = videoRef.current
+    if (!video) return
 
-  function handleCanPlay() {
-    setCanPlay(true)
-    videoRef.current?.play().catch(() => {})
-  }
+    const tryPlay = () => {
+      video.play()
+        .then(() => setNeedsTap(false))
+        .catch(() => setNeedsTap(true))
+    }
+
+    tryPlay()
+    video.addEventListener('loadeddata', tryPlay)
+    return () => video.removeEventListener('loadeddata', tryPlay)
+  }, [])
 
   function handleEnded() {
     setReady(true)
   }
 
   function handleClick() {
-    if (!ready || fading) return
+    if (fading) return
+
+    const video = videoRef.current
+
+    if (!ready) {
+      video?.play().catch(() => setNeedsTap(true))
+      return
+    }
+
     setFading(true)
     setTimeout(() => onDone(), FADE_DURATION_MS)
   }
-
-  const visible = canPlay && !fading
 
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black"
       style={{
-        opacity: visible ? 1 : 0,
-        pointerEvents: visible ? 'auto' : 'none',
+        opacity: fading ? 0 : 1,
         transition: `opacity ${FADE_DURATION_MS}ms ease`,
-        cursor: ready ? 'pointer' : 'default',
+        cursor: 'pointer',
       }}
       onClick={handleClick}
     >
@@ -50,18 +56,21 @@ export default function Intro({ onDone }) {
         ref={videoRef}
         src={introVideo}
         className="h-full w-full max-w-sm object-cover"
+        autoPlay
         muted
         playsInline
         preload="auto"
-        onCanPlay={handleCanPlay}
         onEnded={handleEnded}
       />
 
       <div
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 text-xs tracking-[0.3em] text-white/60 uppercase transition-opacity duration-500"
-        style={{ opacity: ready ? 1 : 0 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 text-center text-xs tracking-[0.3em] text-white/60 uppercase"
       >
-        tap to enter
+        {ready ? (
+          'tap to enter'
+        ) : needsTap ? (
+          'tap to play'
+        ) : null}
       </div>
     </div>
   )
