@@ -26,14 +26,14 @@ function Lightbox({ index, onClose, onPrev, onNext }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/92"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#ede8d4]"
       onClick={onClose}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
       {index > 0 && (
         <button
-          className="absolute left-3 top-1/2 -translate-y-1/2 p-3 text-3xl text-white/50 hover:text-white"
+          className="absolute left-3 top-1/2 -translate-y-1/2 p-3 text-3xl text-black/35 hover:text-black/70"
           onClick={(e) => { e.stopPropagation(); onPrev() }}
         >‹</button>
       )}
@@ -49,17 +49,17 @@ function Lightbox({ index, onClose, onPrev, onNext }) {
 
       {index < PHOTO_COUNT - 1 && (
         <button
-          className="absolute right-3 top-1/2 -translate-y-1/2 p-3 text-3xl text-white/50 hover:text-white"
+          className="absolute right-3 top-1/2 -translate-y-1/2 p-3 text-3xl text-black/35 hover:text-black/70"
           onClick={(e) => { e.stopPropagation(); onNext() }}
         >›</button>
       )}
 
       <button
-        className="absolute right-4 top-4 p-2 text-xl text-white/40 hover:text-white leading-none"
+        className="absolute right-4 top-4 p-2 text-xl text-black/40 hover:text-black/70 leading-none"
         onClick={onClose}
       >✕</button>
 
-      <p className="absolute bottom-5 text-xs tracking-widest text-white/30">
+      <p className="absolute bottom-5 text-xs tracking-widest text-black/35">
         {index + 1} / {PHOTO_COUNT}
       </p>
     </div>
