@@ -109,6 +109,21 @@
   animation: inviteRise 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+/* invite_1.jpg 상단 ~4% 크롭 (1125×2430 기준) */
+.invite-1-crop {
+  width: 100%;
+  aspect-ratio: 1125 / 2333;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.invite-1-crop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 100%;
+}
+
 .save-date-slot {
   top: 27%;
   width: 86%;

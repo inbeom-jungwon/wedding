@@ -130,11 +130,12 @@ export default function InviteHero({ animate, photosUnlocked, onPhotosUnlock, on
   return (
     <div className="w-full">
       <div className="relative w-full">
-        <img
-          src={`${BASE}invite_1.jpg`}
-          alt="청첩장"
-          className="block w-full"
-        />
+        <div className="invite-1-crop">
+          <img
+            src={`${BASE}invite_1.jpg`}
+            alt="청첩장"
+          />
+        </div>
         <img
           src={`${BASE}invite_1_save_the_date.png`}
           alt="Save the Date"
