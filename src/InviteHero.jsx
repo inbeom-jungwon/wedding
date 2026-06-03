@@ -33,12 +33,7 @@ function useInView(threshold = 0.25) {
     if (!el) return
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true)
-          observer.disconnect()
-        }
-      },
+      ([entry]) => setInView(entry.isIntersecting),
       { threshold },
     )
 
@@ -88,7 +83,7 @@ const PHOTOS = [
 
 function PhotoGateSection({ onUnlock, unlocked, onPhotoClick }) {
   return (
-    <div className="photo-gate relative w-full">
+    <div className={`photo-gate relative w-full${unlocked ? ' photo-gate-open' : ''}`}>
       <img
         src={`${BASE}invite_5.jpeg`}
         alt=""
@@ -127,9 +122,11 @@ function PhotoGateSection({ onUnlock, unlocked, onPhotoClick }) {
 }
 
 export default function InviteHero({ animate, photosUnlocked, onPhotosUnlock, onPhotoClick }) {
+  const { ref: saveDateRef, inView: saveDateInView } = useInView(0.2)
+
   return (
     <div className="w-full">
-      <div className="relative w-full">
+      <div ref={saveDateRef} className="relative w-full">
         <div className="invite-1-crop">
           <img
             src={`${BASE}invite_1.jpg`}
@@ -139,7 +136,7 @@ export default function InviteHero({ animate, photosUnlocked, onPhotosUnlock, on
         <img
           src={`${BASE}invite_1_save_the_date.png`}
           alt="Save the Date"
-          className={`invite-rise save-date-slot ${animate ? 'is-active' : ''}`}
+          className={`invite-rise save-date-slot ${animate && saveDateInView ? 'is-active' : ''}`}
           style={{ animationDelay: '0.25s' }}
         />
       </div>
