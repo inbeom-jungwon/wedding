@@ -54,8 +54,8 @@ function openMapApp(map) {
 
 // 오시는 길 NAVER / T MAP 아이콘 위치 (이미지 대비 %)
 const MAP_AREAS = {
-  naver: { top: '58%', left: '44%', width: '5%', height: '1%' },
-  tmap: { top: '58%', left: '52%', width: '5%', height: '1%' },
+  naver: { top: '64.5%', left: '44%', width: '5%', height: '1%' },
+  tmap: { top: '64.5%', left: '52%', width: '5%', height: '1%' },
 }
 
 function MapLink({ map, label, area }) {
@@ -156,8 +156,7 @@ function App() {
         <img
           src={`${import.meta.env.BASE_URL}invite.jpeg`}
           alt="청첩장"
-          className="fade-in block w-full"
-          style={{ animationDelay: '0.2s' }}
+          className="block w-full"
         />
         <MapLink map="naver" label="네이버 지도 앱에서 석파정 보기" area={MAP_AREAS.naver} />
         <MapLink map="tmap" label="티맵 앱에서 석파정 길찾기" area={MAP_AREAS.tmap} />

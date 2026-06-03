@@ -7,9 +7,12 @@ import Intro from './Intro.jsx'
 function Root() {
   const [introDone, setIntroDone] = useState(false)
 
-  return introDone
-    ? <App />
-    : <Intro onDone={() => setIntroDone(true)} />
+  return (
+    <>
+      <App />
+      {!introDone && <Intro onDone={() => setIntroDone(true)} />}
+    </>
+  )
 }
 
 createRoot(document.getElementById('root')).render(
