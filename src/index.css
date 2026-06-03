@@ -56,6 +56,11 @@
   animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
 @layer base {
   html {
     @apply antialiased;

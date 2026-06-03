@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react'
-import saveDateImg from './assets/save_the_date.png'
 
 const PHOTOS = [
   '01.jpeg', '02.jpeg', '03.jpeg', '04.jpeg', '05.jpeg',
@@ -7,18 +6,80 @@ const PHOTOS = [
   '11.jpeg', '12.jpeg', '13.jpeg', '14.jpeg', '15.jpeg',
 ]
 
-const INVITE = {
-  groom: '박인범',
-  bride: '최정원',
-  groomParents: '박 일용 · 이 미경',
-  brideParents: '최 병욱 · 김 명경',
-  date: '2026.09.13',
-  time: '5PM',
-  venueEn: 'Seokpajung',
-  venueKo: '석파정',
-  venueSub: '(서울미술관)',
-  address: '서울특별시 종로구 창의문로11길 4-1',
-  mapUrl: `https://m.map.naver.com/search2/search.naver?query=${encodeURIComponent('석파정')}#/map`,
+const VENUE = {
+  name: '석파정',
+  lat: 37.5923,
+  lng: 126.9682,
+}
+
+const MAP_WEB = {
+  naver: `https://map.naver.com/v5/search/${encodeURIComponent(VENUE.name)}`,
+  tmap: `https://tmap.co.kr/main/routes/?goalName=${encodeURIComponent(VENUE.name)}&goalX=${VENUE.lng}&goalY=${VENUE.lat}`,
+}
+
+function getMapDeepLink(map) {
+  const name = encodeURIComponent(VENUE.name)
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent)
+
+  if (map === 'naver') {
+    return `nmap://place?lat=${VENUE.lat}&lng=${VENUE.lng}&name=${name}&appname=wedding`
+  }
+
+  // iOS: rGoName / Android: goalname
+  if (isIOS) {
+    return `tmap://route?rGoName=${name}&rGoX=${VENUE.lng}&rGoY=${VENUE.lat}`
+  }
+  return `tmap://route?goalname=${name}&goalx=${VENUE.lng}&goaly=${VENUE.lat}`
+}
+
+function openMapApp(map) {
+  const webUrl = MAP_WEB[map]
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+
+  if (!isMobile) {
+    window.open(webUrl, '_blank', 'noopener,noreferrer')
+    return
+  }
+
+  const openedAt = Date.now()
+  window.location.href = getMapDeepLink(map)
+
+  // 앱이 열리면 페이지가 background → 웹 폴백 생략
+  setTimeout(() => {
+    if (!document.hidden && Date.now() - openedAt < 1500) {
+      window.location.href = webUrl
+    }
+  }, 800)
+}
+
+// 오시는 길 NAVER / T MAP 아이콘 위치 (이미지 대비 %)
+const MAP_AREAS = {
+  naver: { top: '58%', left: '44%', width: '5%', height: '1%' },
+  tmap: { top: '58%', left: '52%', width: '5%', height: '1%' },
+}
+
+function MapLink({ map, label, area }) {
+  const devHighlight = import.meta.env.DEV ? 'bg-red-500/25 ring-1 ring-red-400/50' : ''
+
+  return (
+    <a
+      href={MAP_WEB[map]}
+      aria-label={label}
+      className={`absolute z-10 block ${devHighlight}`}
+      style={{
+        top: area.top,
+        left: area.left,
+        width: area.width,
+        height: area.height,
+      }}
+      onClick={(e) => {
+        e.preventDefault()
+        openMapApp(map)
+      }}
+    >
+      <span className="sr-only">{label}</span>
+    </a>
+  )
 }
 
 function Lightbox({ index, onClose, onPrev, onNext }) {
@@ -26,16 +87,16 @@ function Lightbox({ index, onClose, onPrev, onNext }) {
 
   useEffect(() => {
     const onKey = (e) => {
-      if (e.key === 'ArrowLeft')  onPrev()
+      if (e.key === 'ArrowLeft') onPrev()
       if (e.key === 'ArrowRight') onNext()
-      if (e.key === 'Escape')     onClose()
+      if (e.key === 'Escape') onClose()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [onPrev, onNext, onClose])
 
   const handleTouchStart = (e) => { touchStartX.current = e.touches[0].clientX }
-  const handleTouchEnd   = (e) => {
+  const handleTouchEnd = (e) => {
     if (touchStartX.current === null) return
     const dx = e.changedTouches[0].clientX - touchStartX.current
     if (Math.abs(dx) > 40) dx < 0 ? onNext() : onPrev()
@@ -88,112 +149,35 @@ function App() {
   const [lightboxIndex, setLightboxIndex] = useState(null)
 
   return (
-    <div className="mx-auto flex min-h-svh max-w-sm flex-col items-center bg-bg px-6 pb-20 pt-16 text-center">
+    <div className="mx-auto min-h-svh max-w-sm bg-bg">
 
-      {/* We invited you to.. */}
-      <p
-        className="mb-6 text-cream"
-        style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(2rem,9vw,2.6rem)', lineHeight: 1.2 }}
-      >
-        We invited you to..
-      </p>
-
-      {/* 장식 별 */}
-      <p className="mb-8 tracking-wider text-cream/50 text-xs" style={{ fontFamily: 'var(--font-sc)' }}>* * *</p>
-
-      {/* 린넨 카드 */}
-      <div
-        className="w-full rounded-sm px-8 py-16 text-[#2c2420]"
-        style={{
-          backgroundImage: `url(${import.meta.env.BASE_URL}linen.png)`,
-          backgroundSize: '100% 100%',
-        }}
-      >
+      {/* 디자인 청첩장 이미지 + 오시는 길 버튼 */}
+      <div className="relative w-full">
         <img
-          src={saveDateImg}
-          alt="Save the Date"
-          className="fade-up mx-auto mb-5 w-4/5"
+          src={`${import.meta.env.BASE_URL}invite.jpeg`}
+          alt="청첩장"
+          className="fade-in block w-full"
           style={{ animationDelay: '0.2s' }}
         />
-        <p
-          className="fade-up mb-1 tracking-wider text-[#2c2420]"
-          style={{ fontFamily: 'var(--font-sc)', fontSize: '0.85rem', animationDelay: '0.5s' }}
-        >
-          {INVITE.date}
-        </p>
-        <p
-          className="fade-up mb-4 tracking-wider text-[#2c2420]"
-          style={{ fontFamily: 'var(--font-sc)', fontSize: '0.82rem', animationDelay: '0.8s' }}
-        >
-          {INVITE.time}
-        </p>
-        <p
-          className="fade-up uppercase tracking-wider text-[#2c2420]"
-          style={{ fontFamily: 'var(--font-sc)', fontSize: '0.75rem', animationDelay: '1.1s' }}
-        >
-          {INVITE.venueEn}
-        </p>
+        <MapLink map="naver" label="네이버 지도 앱에서 석파정 보기" area={MAP_AREAS.naver} />
+        <MapLink map="tmap" label="티맵 앱에서 석파정 길찾기" area={MAP_AREAS.tmap} />
       </div>
-
-      {/* 부모님 */}
-      <div className="mt-14 space-y-0.5 text-[0.8rem] font-light leading-snug text-muted" style={{ fontFamily: 'var(--font-mono)' }}>
-        <p>
-          <span className="text-cream/60">{INVITE.groomParents}</span>
-          <span className="mx-2 text-cream/30">의 아들</span>
-          <span className="text-cream">{INVITE.groom}</span>
-        </p>
-        <p>
-          <span className="text-cream/60">{INVITE.brideParents}</span>
-          <span className="mx-2 text-cream/30">의 딸</span>
-          <span className="text-cream">{INVITE.bride}</span>
-        </p>
-      </div>
-
-      {/* 날짜 반복 */}
-      <div className="mt-10 space-y-0.5 font-display text-[0.95rem] tracking-widest text-cream/80">
-        <p>{INVITE.date}</p>
-        <p>{INVITE.time}</p>
-      </div>
-
-      {/* 장소 */}
-      <div className="mt-6">
-        <p
-          className="font-light tracking-[0.4em] text-cream"
-          style={{ fontFamily: 'var(--font-mono)', fontSize: 'clamp(0.85rem,3.5vw,1rem)' }}
-        >
-          {INVITE.venueKo}
-        </p>
-        <p className="mt-1 text-xs font-light tracking-widest text-muted" style={{ fontFamily: 'var(--font-mono)' }}>
-          {INVITE.venueSub}
-        </p>
-      </div>
-
-      {/* 지도 버튼 */}
-      <a
-        href={INVITE.mapUrl}
-        target="_blank"
-        rel="noreferrer"
-        className="mt-10 block rounded border border-cream/20 px-8 py-2.5 text-[0.8rem] font-semibold tracking-widest text-cream/70 uppercase transition-colors hover:border-cream/40 hover:text-cream"
-      >
-        지도 보기
-      </a>
 
       {/* 사진 3열 그리드 */}
       {PHOTOS.length > 0 && (
-        <div className="mt-10 w-full grid grid-cols-3 gap-1">
+        <div className="grid w-full grid-cols-3 gap-1">
           {PHOTOS.map((filename, i) => (
             <img
               key={i}
               src={`${import.meta.env.BASE_URL}photos/${filename}`}
               alt={`wedding ${i + 1}`}
-              className="w-full aspect-square object-cover cursor-pointer"
+              className="aspect-square w-full cursor-pointer object-cover"
               onClick={() => setLightboxIndex(i)}
             />
           ))}
         </div>
       )}
 
-      {/* 라이트박스 */}
       {lightboxIndex !== null && (
         <Lightbox
           index={lightboxIndex}
