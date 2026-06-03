@@ -4,9 +4,11 @@ import './index.css'
 import App from './App.jsx'
 import Intro from './Intro.jsx'
 
+const INTRO_ENABLED = true // 디버그용 — true로 바꾸면 Intro 다시 켜짐
+
 function Root() {
-  const [introDone, setIntroDone] = useState(false)
-  const [pageActive, setPageActive] = useState(false)
+  const [introDone, setIntroDone] = useState(!INTRO_ENABLED)
+  const [pageActive, setPageActive] = useState(!INTRO_ENABLED)
 
   useEffect(() => {
     document.documentElement.classList.toggle('page-active', pageActive)
@@ -14,8 +16,8 @@ function Root() {
 
   return (
     <>
-      <App />
-      {!introDone && (
+      <App animateSaveDate={pageActive} />
+      {INTRO_ENABLED && !introDone && (
         <Intro
           onEnter={() => setPageActive(true)}
           onDone={() => setIntroDone(true)}
