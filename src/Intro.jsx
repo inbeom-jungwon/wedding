@@ -7,17 +7,11 @@ export default function Intro({ onEnter, onDone }) {
   const videoRef = useRef(null)
   const [ready, setReady] = useState(false)
   const [fading, setFading] = useState(false)
-  const [needsTap, setNeedsTap] = useState(false)
-
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
 
-    const tryPlay = () => {
-      video.play()
-        .then(() => setNeedsTap(false))
-        .catch(() => setNeedsTap(true))
-    }
+    const tryPlay = () => { video.play().catch(() => {}) }
 
     tryPlay()
     video.addEventListener('loadeddata', tryPlay)
@@ -34,7 +28,7 @@ export default function Intro({ onEnter, onDone }) {
     const video = videoRef.current
 
     if (!ready) {
-      video?.play().catch(() => setNeedsTap(true))
+      video?.play().catch(() => {})
       return
     }
 
@@ -67,11 +61,7 @@ export default function Intro({ onEnter, onDone }) {
       <div
         className="absolute bottom-12 left-1/2 -translate-x-1/2 text-center text-xs tracking-[0.3em] text-white/60 uppercase"
       >
-        {ready ? (
-          'tap to enter'
-        ) : needsTap ? (
-          'tap to play'
-        ) : null}
+        {ready ? 'tap to enter' : null}
       </div>
     </div>
   )
