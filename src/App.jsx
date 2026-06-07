@@ -41,7 +41,7 @@ function Lightbox({ index, onClose, onPrev, onNext }) {
 
       <img
         key={index}
-        src={`${import.meta.env.BASE_URL}photos/${String(index + 1).padStart(2, '0')}.jpeg`}
+        src={`${import.meta.env.BASE_URL}photos/${String(index + 1).padStart(2, '0')}.jpg`}
         alt={`wedding ${index + 1}`}
         className="max-h-svh max-w-full object-contain"
         style={{ animation: 'fadeIn 0.2s ease' }}

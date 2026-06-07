@@ -75,9 +75,9 @@ function MapSection() {
 }
 
 const PHOTOS = [
-  '01.jpeg', '02.jpeg', '03.jpeg', '04.jpeg', '05.jpeg',
-  '06.jpeg', '07.jpeg', '08.jpeg', '09.jpeg', '10.jpeg',
-  '11.jpeg', '12.jpeg', '13.jpeg', '14.jpeg', '15.jpeg',
+  '01.jpg', '02.jpg', '03.jpg', '04.jpg', '05.jpg',
+  '06.jpg', '07.jpg', '08.jpg', '09.jpg', '10.jpg',
+  '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg',
 ]
 
 function PhotoGateSection({ onUnlock, unlocked, onPhotoClick }) {

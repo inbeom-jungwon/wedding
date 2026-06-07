@@ -210,6 +210,18 @@
   max-width: 70px;
 }
 
+@keyframes photoClickBounce {
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -5%, 0);
+  }
+}
+
 .photo-click-slot {
   top: 78%;
   width: 18%;
@@ -218,6 +230,18 @@
   z-index: 2;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+}
+
+.photo-click-slot img {
+  display: block;
+  backface-visibility: hidden;
+  will-change: transform;
+  animation: photoClickBounce 1s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.photo-click-slot:active img {
+  animation: none;
+  transform: translate3d(0, 2%, 0);
 }
 
 /* 사진 열리면 invite_5 하단(빈 영역)은 그리드가 대체 */
