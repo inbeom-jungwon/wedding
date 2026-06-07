@@ -1,16 +1,13 @@
 export const VENUE = {
-  name: '석파정',
-  address: '서울특별시 종로구 창의문로11길 4-1',
-  lat: 37.5923,
-  lng: 126.9682,
+  name: '석파정 서울미술관',
 }
 
-/** 동명 장소 구분용 — 네이버 검색·표시에 이름+주소 함께 사용 */
-const NAVER_QUERY = `${VENUE.name} ${VENUE.address}`
+const MAP_QUERY = VENUE.name
+const encodedQuery = () => encodeURIComponent(MAP_QUERY)
 
 export const MAP_WEB = {
-  naver: `https://map.naver.com/v5/search/${encodeURIComponent(NAVER_QUERY)}`,
-  tmap: `https://tmap.co.kr/main/routes/?goalName=${encodeURIComponent(NAVER_QUERY)}&goalX=${VENUE.lng}&goalY=${VENUE.lat}`,
+  naver: `https://map.naver.com/v5/search/${encodedQuery()}`,
+  tmap: `https://tmap.co.kr/main/search?searchKeyword=${encodedQuery()}`,
 }
 
 const TMAP_STORE = {
@@ -33,17 +30,13 @@ function getTmapStoreUrl() {
 }
 
 function getMapDeepLink(map) {
-  const placeName = encodeURIComponent(NAVER_QUERY)
+  const query = encodedQuery()
 
   if (map === 'naver') {
-    // 좌표로 정확한 위치 + 이름·주소로 동명 장소 구분
-    return `nmap://place?lat=${VENUE.lat}&lng=${VENUE.lng}&name=${placeName}&appname=wedding`
+    return `nmap://search?query=${query}&appname=wedding`
   }
 
-  if (isIOS()) {
-    return `tmap://route?rGoName=${placeName}&rGoX=${VENUE.lng}&rGoY=${VENUE.lat}`
-  }
-  return `tmap://route?goalname=${placeName}&goalx=${VENUE.lng}&goaly=${VENUE.lat}`
+  return `tmap://search?name=${query}`
 }
 
 function getMobileFallbackUrl(map) {
