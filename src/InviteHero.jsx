@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { openMapApp } from './mapLinks.js'
 
 const BASE = import.meta.env.BASE_URL
-const RSVP_URL = '#'
 
 function MapIcon({ map, active, delay }) {
   const label = map === 'naver' ? '네이버 지도 앱에서 석파정 보기' : '티맵 앱에서 석파정 길찾기'
@@ -121,7 +120,7 @@ function PhotoGateSection({ onUnlock, unlocked, onPhotoClick }) {
   )
 }
 
-export default function InviteHero({ animate, photosUnlocked, onPhotosUnlock, onPhotoClick }) {
+export default function InviteHero({ animate, photosUnlocked, onPhotosUnlock, onPhotoClick, onRsvpClick }) {
   const { ref: saveDateRef, inView: saveDateInView } = useInView(0.2)
 
   return (
@@ -148,18 +147,18 @@ export default function InviteHero({ animate, photosUnlocked, onPhotosUnlock, on
           className="block w-full"
           aria-hidden
         />
-        <a
-          href={RSVP_URL}
-          className="invite-blink rsvp-slot absolute left-1/2 -translate-x-1/2 block"
+        <button
+          type="button"
+          className="invite-blink rsvp-slot absolute left-1/2 -translate-x-1/2 block border-0 bg-transparent p-0"
           aria-label="RSVP 참석 여부 응답하기"
-          onClick={RSVP_URL === '#' ? (e) => e.preventDefault() : undefined}
+          onClick={onRsvpClick}
         >
           <img
             src={`${BASE}invite_2_rsvp.png`}
             alt="RSVP"
             className="block w-full"
           />
-        </a>
+        </button>
       </div>
 
       <MapSection />

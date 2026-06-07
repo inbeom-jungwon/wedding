@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import InviteHero from './InviteHero.jsx'
+import RsvpModal from './RsvpModal.jsx'
 
 const PHOTO_COUNT = 15
 
@@ -69,6 +70,7 @@ function Lightbox({ index, onClose, onPrev, onNext }) {
 function App({ animateSaveDate = false }) {
   const [lightboxIndex, setLightboxIndex] = useState(null)
   const [photosUnlocked, setPhotosUnlocked] = useState(false)
+  const [rsvpOpen, setRsvpOpen] = useState(false)
 
   return (
     <div className="mx-auto min-h-svh max-w-sm bg-[#ede8d4]">
@@ -78,7 +80,10 @@ function App({ animateSaveDate = false }) {
         photosUnlocked={photosUnlocked}
         onPhotosUnlock={() => setPhotosUnlocked(true)}
         onPhotoClick={setLightboxIndex}
+        onRsvpClick={() => setRsvpOpen(true)}
       />
+
+      <RsvpModal open={rsvpOpen} onClose={() => setRsvpOpen(false)} />
 
       {lightboxIndex !== null && (
         <Lightbox
