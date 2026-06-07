@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import InviteHero from './InviteHero.jsx'
 import RsvpModal from './RsvpModal.jsx'
-
-const PHOTO_COUNT = 15
+import { PHOTO_COUNT, photoSrc, preloadPhotos } from './photos.js'
 
 function Lightbox({ index, onClose, onPrev, onNext }) {
   const touchStartX = useRef(null)
@@ -41,7 +40,7 @@ function Lightbox({ index, onClose, onPrev, onNext }) {
 
       <img
         key={index}
-        src={`${import.meta.env.BASE_URL}photos/${String(index + 1).padStart(2, '0')}.jpg`}
+        src={photoSrc(index)}
         alt={`wedding ${index + 1}`}
         className="max-h-svh max-w-full object-contain"
         style={{ animation: 'fadeIn 0.2s ease' }}
@@ -71,6 +70,10 @@ function App({ animateSaveDate = false }) {
   const [lightboxIndex, setLightboxIndex] = useState(null)
   const [photosUnlocked, setPhotosUnlocked] = useState(false)
   const [rsvpOpen, setRsvpOpen] = useState(false)
+
+  useEffect(() => {
+    if (animateSaveDate) preloadPhotos()
+  }, [animateSaveDate])
 
   return (
     <div className="mx-auto min-h-svh max-w-sm bg-[#ede8d4]">

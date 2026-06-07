@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { openMapApp } from './mapLinks.js'
+import { PHOTO_COUNT, photoSrc, preloadPhotos } from './photos.js'
 
 const BASE = import.meta.env.BASE_URL
 
@@ -74,15 +75,18 @@ function MapSection() {
   )
 }
 
-const PHOTOS = [
-  '01.jpg', '02.jpg', '03.jpg', '04.jpg', '05.jpg',
-  '06.jpg', '07.jpg', '08.jpg', '09.jpg', '10.jpg',
-  '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg',
-]
-
 function PhotoGateSection({ onUnlock, unlocked, onPhotoClick }) {
+  const { ref, inView } = useInView(0.1)
+
+  useEffect(() => {
+    if (inView) preloadPhotos()
+  }, [inView])
+
   return (
-    <div className={`photo-gate relative w-full${unlocked ? ' photo-gate-open' : ''}`}>
+    <div
+      ref={ref}
+      className={`photo-gate relative w-full${unlocked ? ' photo-gate-open' : ''}`}
+    >
       <img
         src={`${BASE}invite_5.jpeg`}
         alt=""
@@ -105,14 +109,22 @@ function PhotoGateSection({ onUnlock, unlocked, onPhotoClick }) {
         </button>
       ) : (
         <div className="photo-grid-slot photos-reveal grid w-full grid-cols-3 gap-1">
-          {PHOTOS.map((filename, i) => (
+          {Array.from({ length: PHOTO_COUNT }, (_, i) => (
             <img
-              key={filename}
-              src={`${BASE}photos/${filename}`}
+              key={i}
+              src={photoSrc(i)}
               alt={`wedding ${i + 1}`}
               className="aspect-square w-full cursor-pointer object-cover"
               onClick={() => onPhotoClick(i)}
             />
+          ))}
+        </div>
+      )}
+
+      {inView && !unlocked && (
+        <div className="photo-preload" aria-hidden>
+          {Array.from({ length: PHOTO_COUNT }, (_, i) => (
+            <img key={i} src={photoSrc(i)} alt="" />
           ))}
         </div>
       )}

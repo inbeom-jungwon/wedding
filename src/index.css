@@ -244,6 +244,15 @@
   transform: translate3d(0, 2%, 0);
 }
 
+.photo-preload {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* 사진 열리면 invite_5 하단(빈 영역)은 그리드가 대체 */
 .photo-gate-bg-cut {
   clip-path: inset(0 0 22% 0);
