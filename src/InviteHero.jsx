@@ -83,15 +83,8 @@ function RsvpSection({ onRsvpClick }) {
   )
 }
 
-function MapSection({ onRsvpAutoOpen, active }) {
+function MapSection() {
   const { ref, inView } = useInView(0.3)
-  const autoOpened = useRef(false)
-
-  useEffect(() => {
-    if (!active || !inView || autoOpened.current) return
-    autoOpened.current = true
-    onRsvpAutoOpen()
-  }, [active, inView, onRsvpAutoOpen])
 
   return (
     <div ref={ref} className="relative w-full">
@@ -177,7 +170,6 @@ export default function InviteHero({
   onPhotosUnlock,
   onPhotoClick,
   onRsvpClick,
-  onRsvpAutoOpen,
 }) {
   const { ref: saveDateRef, inView: saveDateInView } = useInView(0.2)
 
@@ -200,7 +192,7 @@ export default function InviteHero({
 
       <RsvpSection onRsvpClick={onRsvpClick} />
 
-      <MapSection active={animate} onRsvpAutoOpen={onRsvpAutoOpen} />
+      <MapSection />
       <Invite4Section />
       <PhotoGateSection
         onUnlock={onPhotosUnlock}

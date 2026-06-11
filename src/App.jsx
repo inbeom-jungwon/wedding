@@ -92,10 +92,13 @@ function Lightbox({ index, onClose, onPrev, onNext }) {
   )
 }
 
-function App({ animateSaveDate = false }) {
+function App({
+  animateSaveDate = false,
+  rsvpOpen = false,
+  onRsvpOpenChange = () => {},
+}) {
   const [lightboxIndex, setLightboxIndex] = useState(null)
   const [photosUnlocked, setPhotosUnlocked] = useState(false)
-  const [rsvpOpen, setRsvpOpen] = useState(false)
 
   useEffect(() => {
     if (animateSaveDate) preloadPhotos()
@@ -109,11 +112,10 @@ function App({ animateSaveDate = false }) {
         photosUnlocked={photosUnlocked}
         onPhotosUnlock={() => setPhotosUnlocked(true)}
         onPhotoClick={setLightboxIndex}
-        onRsvpClick={() => setRsvpOpen(true)}
-        onRsvpAutoOpen={() => setRsvpOpen(true)}
+        onRsvpClick={() => onRsvpOpenChange(true)}
       />
 
-      <RsvpModal open={rsvpOpen} onClose={() => setRsvpOpen(false)} />
+      <RsvpModal open={rsvpOpen} onClose={() => onRsvpOpenChange(false)} />
 
       {lightboxIndex !== null && (
         <Lightbox
