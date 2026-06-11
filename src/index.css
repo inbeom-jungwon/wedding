@@ -278,6 +278,14 @@
   animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+.photo-grid-img {
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
 /* RSVP 모달 */
 .rsvp-overlay {
   position: fixed;

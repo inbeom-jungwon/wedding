@@ -75,7 +75,7 @@ function MapSection() {
   )
 }
 
-function PhotoGateSection({ onUnlock, unlocked, onPhotoClick }) {
+function PhotoGateSection({ onUnlock, unlocked }) {
   const { ref, inView } = useInView(0.1)
 
   useEffect(() => {
@@ -114,8 +114,8 @@ function PhotoGateSection({ onUnlock, unlocked, onPhotoClick }) {
               key={i}
               src={photoSrc(i)}
               alt={`wedding ${i + 1}`}
-              className="aspect-square w-full cursor-pointer object-cover"
-              onClick={() => onPhotoClick(i)}
+              className="photo-grid-img aspect-square w-full object-cover"
+              draggable={false}
             />
           ))}
         </div>
@@ -132,7 +132,7 @@ function PhotoGateSection({ onUnlock, unlocked, onPhotoClick }) {
   )
 }
 
-export default function InviteHero({ animate, photosUnlocked, onPhotosUnlock, onPhotoClick, onRsvpClick }) {
+export default function InviteHero({ animate, photosUnlocked, onPhotosUnlock, onRsvpClick }) {
   const { ref: saveDateRef, inView: saveDateInView } = useInView(0.2)
 
   return (
@@ -178,7 +178,6 @@ export default function InviteHero({ animate, photosUnlocked, onPhotosUnlock, on
       <PhotoGateSection
         onUnlock={onPhotosUnlock}
         unlocked={photosUnlocked}
-        onPhotoClick={onPhotoClick}
       />
     </div>
   )
