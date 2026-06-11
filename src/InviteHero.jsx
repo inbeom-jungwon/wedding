@@ -58,8 +58,40 @@ function Invite4Section() {
   )
 }
 
-function MapSection() {
+function RsvpSection({ onRsvpClick }) {
+  return (
+    <div className="relative w-full">
+      <img
+        src={`${BASE}invite_2.jpg`}
+        alt=""
+        className="block w-full"
+        aria-hidden
+      />
+      <button
+        type="button"
+        className="invite-blink rsvp-slot absolute left-1/2 -translate-x-1/2 block border-0 bg-transparent p-0"
+        aria-label="RSVP 참석 여부 응답하기"
+        onClick={onRsvpClick}
+      >
+        <img
+          src={`${BASE}invite_2_rsvp.png`}
+          alt="RSVP"
+          className="block w-full"
+        />
+      </button>
+    </div>
+  )
+}
+
+function MapSection({ onRsvpAutoOpen, active }) {
   const { ref, inView } = useInView(0.3)
+  const autoOpened = useRef(false)
+
+  useEffect(() => {
+    if (!active || !inView || autoOpened.current) return
+    autoOpened.current = true
+    onRsvpAutoOpen()
+  }, [active, inView, onRsvpAutoOpen])
 
   return (
     <div ref={ref} className="relative w-full">
@@ -139,7 +171,14 @@ function PhotoGateSection({ onUnlock, unlocked, onPhotoClick }) {
   )
 }
 
-export default function InviteHero({ animate, photosUnlocked, onPhotosUnlock, onPhotoClick, onRsvpClick }) {
+export default function InviteHero({
+  animate,
+  photosUnlocked,
+  onPhotosUnlock,
+  onPhotoClick,
+  onRsvpClick,
+  onRsvpAutoOpen,
+}) {
   const { ref: saveDateRef, inView: saveDateInView } = useInView(0.2)
 
   return (
@@ -159,28 +198,9 @@ export default function InviteHero({ animate, photosUnlocked, onPhotosUnlock, on
         />
       </div>
 
-      <div className="relative w-full">
-        <img
-          src={`${BASE}invite_2.jpg`}
-          alt=""
-          className="block w-full"
-          aria-hidden
-        />
-        <button
-          type="button"
-          className="invite-blink rsvp-slot absolute left-1/2 -translate-x-1/2 block border-0 bg-transparent p-0"
-          aria-label="RSVP 참석 여부 응답하기"
-          onClick={onRsvpClick}
-        >
-          <img
-            src={`${BASE}invite_2_rsvp.png`}
-            alt="RSVP"
-            className="block w-full"
-          />
-        </button>
-      </div>
+      <RsvpSection onRsvpClick={onRsvpClick} />
 
-      <MapSection />
+      <MapSection active={animate} onRsvpAutoOpen={onRsvpAutoOpen} />
       <Invite4Section />
       <PhotoGateSection
         onUnlock={onPhotosUnlock}
