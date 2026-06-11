@@ -116,11 +116,22 @@ export default function RsvpModal({ open, onClose }) {
         ) : (
           <form onSubmit={handleSubmit}>
             <h2 id="rsvp-title" className="rsvp-title">참석 의사 체크하기</h2>
-            <p className="rsvp-desc">
-              소중한 시간 내어 참석해 주시는 모든 분들께 정성스럽게 준비하오니
-              <br />
-              참석 여부를 알려주시면 감사하겠습니다.
-            </p>
+            <div className="rsvp-desc">
+              <p className="rsvp-event">
+                2026년 9월 13일
+                <br />
+                일요일 오후 5시
+                <br />
+                석파정
+              </p>
+              <p className="rsvp-message">
+                소중한 시간내어 함께해주시는 모든 분들께
+                <br />
+                정성스럽게 준비하고자 하오니
+                <br />
+                참석 여부를 알려주시면 감사하겠습니다.
+              </p>
+            </div>
 
             <ChoiceGroup
               label="어느 분의 하객이신가요?"

@@ -426,9 +426,21 @@
 .rsvp-desc {
   margin: 0 0 1.5rem;
   text-align: center;
-  font-size: 0.82rem;
-  line-height: 1.65;
   color: #7a6e64;
+}
+
+.rsvp-event {
+  margin: 0 0 1rem;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  color: #3a332e;
+}
+
+.rsvp-message {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.75;
 }
 
 .rsvp-field {
