@@ -278,12 +278,89 @@
   animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+.photo-grid-btn {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .photo-grid-img {
+  display: block;
   touch-action: manipulation;
   -webkit-touch-callout: none;
   user-select: none;
   -webkit-user-drag: none;
   pointer-events: none;
+}
+
+/* 사진 전체화면 뷰어 — 줌 없음, 배경 스크롤 차단 */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ede8d4;
+  overscroll-behavior: none;
+  touch-action: none;
+  animation: fadeIn 0.2s ease;
+}
+
+.lightbox-img {
+  max-height: 100svh;
+  max-width: 100%;
+  object-fit: contain;
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+  animation: fadeIn 0.2s ease;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  padding: 0.75rem;
+  font-size: 1.875rem;
+  line-height: 1;
+  color: rgb(0 0 0 / 0.35);
+  cursor: pointer;
+}
+
+.lightbox-nav--prev {
+  left: 0.75rem;
+}
+
+.lightbox-nav--next {
+  right: 0.75rem;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: none;
+  background: transparent;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: rgb(0 0 0 / 0.4);
+  cursor: pointer;
+}
+
+.lightbox-counter {
+  position: absolute;
+  bottom: 1.25rem;
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: rgb(0 0 0 / 0.35);
 }
 
 /* RSVP 모달 */

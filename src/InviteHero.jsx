@@ -75,7 +75,7 @@ function MapSection() {
   )
 }
 
-function PhotoGateSection({ onUnlock, unlocked }) {
+function PhotoGateSection({ onUnlock, unlocked, onPhotoClick }) {
   const { ref, inView } = useInView(0.1)
 
   useEffect(() => {
@@ -110,13 +110,20 @@ function PhotoGateSection({ onUnlock, unlocked }) {
       ) : (
         <div className="photo-grid-slot photos-reveal grid w-full grid-cols-3 gap-1">
           {Array.from({ length: PHOTO_COUNT }, (_, i) => (
-            <img
+            <button
               key={i}
-              src={photoSrc(i)}
-              alt={`wedding ${i + 1}`}
-              className="photo-grid-img aspect-square w-full object-cover"
-              draggable={false}
-            />
+              type="button"
+              className="photo-grid-btn border-0 bg-transparent p-0"
+              aria-label={`사진 ${i + 1} 크게 보기`}
+              onClick={() => onPhotoClick(i)}
+            >
+              <img
+                src={photoSrc(i)}
+                alt={`wedding ${i + 1}`}
+                className="photo-grid-img aspect-square w-full object-cover"
+                draggable={false}
+              />
+            </button>
           ))}
         </div>
       )}
@@ -132,7 +139,7 @@ function PhotoGateSection({ onUnlock, unlocked }) {
   )
 }
 
-export default function InviteHero({ animate, photosUnlocked, onPhotosUnlock, onRsvpClick }) {
+export default function InviteHero({ animate, photosUnlocked, onPhotosUnlock, onPhotoClick, onRsvpClick }) {
   const { ref: saveDateRef, inView: saveDateInView } = useInView(0.2)
 
   return (
@@ -178,6 +185,7 @@ export default function InviteHero({ animate, photosUnlocked, onPhotosUnlock, on
       <PhotoGateSection
         onUnlock={onPhotosUnlock}
         unlocked={photosUnlocked}
+        onPhotoClick={onPhotoClick}
       />
     </div>
   )
