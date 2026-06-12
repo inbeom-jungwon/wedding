@@ -1,9 +1,9 @@
-export const PHOTO_COUNT = 15
+export const PHOTO_COUNT = 18
 
 const BASE = import.meta.env.BASE_URL
 
 export function photoSrc(index) {
-  return `${BASE}photos/${String(index + 1).padStart(2, '0')}.jpg`
+  return `${BASE}photos/${String(index + 1).padStart(2, '0')}.jpeg`
 }
 
 export function preloadPhotos() {
