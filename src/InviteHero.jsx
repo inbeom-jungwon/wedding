@@ -133,23 +133,30 @@ function PhotoGateSection({ onUnlock, unlocked, onPhotoClick }) {
           />
         </button>
       ) : (
-        <div className="photo-grid-slot photos-reveal grid w-full grid-cols-3 gap-1">
-          {Array.from({ length: PHOTO_COUNT }, (_, i) => (
-            <button
-              key={i}
-              type="button"
-              className="photo-grid-btn border-0 bg-transparent p-0"
-              aria-label={`사진 ${i + 1} 크게 보기`}
-              onClick={() => onPhotoClick(i)}
-            >
-              <img
-                src={photoSrc(i)}
-                alt={`wedding ${i + 1}`}
-                className="photo-grid-img aspect-square w-full object-cover"
-                draggable={false}
-              />
-            </button>
-          ))}
+        <div className="photo-gallery-unlocked photos-reveal">
+          <img
+            src={`${BASE}invite_6.jpeg`}
+            alt="신부의 20년 지기 친구, 아영이 담아준 사진들입니다."
+            className="photo-caption"
+          />
+          <div className="photo-grid-slot grid w-full grid-cols-3 gap-1">
+            {Array.from({ length: PHOTO_COUNT }, (_, i) => (
+              <button
+                key={i}
+                type="button"
+                className="photo-grid-btn border-0 bg-transparent p-0"
+                aria-label={`사진 ${i + 1} 크게 보기`}
+                onClick={() => onPhotoClick(i)}
+              >
+                <img
+                  src={photoSrc(i)}
+                  alt={`wedding ${i + 1}`}
+                  className="photo-grid-img aspect-square w-full object-cover"
+                  draggable={false}
+                />
+              </button>
+            ))}
+          </div>
         </div>
       )}
 

@@ -253,9 +253,22 @@
   pointer-events: none;
 }
 
-/* 사진 열리면 invite_5 하단(빈 영역)은 그리드가 대체 */
+/* 사진 열리면 invite_5 하단(포토 클릭 영역)만 잘라냄 */
 .photo-gate-bg-cut {
-  clip-path: inset(0 0 22% 0);
+  clip-path: inset(0 0 27% 0);
+}
+
+.photo-gallery-unlocked {
+  width: 100%;
+  margin-top: -22%;
+}
+
+.photo-caption {
+  display: block;
+  width: 66.5%;
+  max-width: 16.5rem;
+  margin: 0 auto;
+  padding: 0.2rem 0 0.45rem;
 }
 
 .photo-grid-slot {
@@ -266,11 +279,11 @@
   z-index: 2;
 }
 
-/* 그리드 열릴 때: 문서 흐름 + 하단 여백 (invite_5 비율 기준 위치 유지) */
-.photo-gate-open .photo-grid-slot {
+/* 그리드 열릴 때: 멘트 → 사진 순서로 문서 흐름 */
+.photo-gate-open .photo-gallery-unlocked .photo-grid-slot {
   position: relative;
   top: auto;
-  margin-top: -23.5%;
+  margin-top: 0.65rem;
   padding-bottom: clamp(1.25rem, 5vw, 2rem);
 }
 
